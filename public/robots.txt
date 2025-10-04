@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://funnelfoxdigital.com/sitemap.xml

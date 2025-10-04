@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "services": "Perkhidmatan",
+    "about": "Tentang Kami",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "contact": "Hubungi Kami"
+  },
+  "cta": {
+    "blueprint": "Dapatkan Pelan",
+    "getStarted": "Mula Sekarang",
+    "learnMore": "Ketahui Lebih Lanjut",
+    "contactUs": "Hubungi Kami"
+  },
+  "common": {
+    "toggleMenu": "Tukar menu",
+    "close": "Tutup",
+    "open": "Buka"
+  },
+  "meta": {
+    "title": "FunnelFox Digital - Pemasaran Digital & Reka Bentuk Web",
+    "description": "Perkhidmatan pemasaran digital dan reka bentuk web profesional untuk mengembangkan perniagaan anda dalam talian."
+  }
+}

@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  funnelfoxdigital:
+    build: .
+    container_name: funnelfoxdigital
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3010:3010"
