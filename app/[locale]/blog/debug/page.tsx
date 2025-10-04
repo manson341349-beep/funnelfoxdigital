@@ -10,13 +10,13 @@ export default function DebugImages(){
         <div>
           <h2 className="font-medium mb-2">{`<img>`} from /public</h2>
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <img src="/media/blog/ai-cwv.svg" alt="test" className="w-full h-full object-cover" />
+            <img src="/media/blog/ai-cwv.webp" alt="test" className="w-full h-full object-cover" />
           </div>
         </div>
         <div>
           <h2 className="font-medium mb-2">Next/Image (string path)</h2>
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <Image src="/media/blog/ai-cwv.svg" alt="test" fill className="object-cover" />
+            <Image src="/media/blog/ai-cwv.webp" alt="test" fill className="object-cover" />
           </div>
         </div>
       </div>

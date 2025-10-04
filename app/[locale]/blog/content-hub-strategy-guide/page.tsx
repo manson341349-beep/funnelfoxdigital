@@ -18,7 +18,7 @@ export default function Page(){
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Content Hub Strategy: Building Authority Through Strategic Content Architecture</h1>
           <p className="mt-3 text-neutral-600 max-w-2xl">Learn how to create powerful content hubs that establish topical authority, improve SEO rankings, and drive sustained organic traffic growth through strategic content organization and interlinking.</p>
           <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <Image src="/blog/content-hub.webp" alt="Content Hub Strategy Architecture" width={1280} height={720} className="h-full w-full object-cover" priority />
+            <Image src="/media/blog/content-hub.webp" alt="Content Hub Strategy Architecture" width={1280} height={720} className="h-full w-full object-cover" priority />
           </div>
         </div>
       </section>

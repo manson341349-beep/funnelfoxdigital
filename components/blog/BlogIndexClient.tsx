@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 // Posts dataset (8 items, 2023 -> now)
 const posts = [
   {
-    slug: "ai-for-core-web-vitals",
+    slug: "ai-powered-cwv-optimization",
     title: "Using AI to Prioritize Core Web Vitals Fixes",
     date: "2023-04-18",
     excerpt: "How to triage LCP/INP opportunities with data-driven heuristics.",
@@ -17,7 +17,7 @@ const posts = [
     alt: "AI-enhanced Core Web Vitals dashboard"
   },
   {
-    slug: "local-seo-malaysia-2024",
+    slug: "local-seo-kl",
     title: "Local SEO in Malaysia: Tactics That Still Win",
     date: "2024-02-07",
     excerpt: "From NAP consistency to intent-led topic clusters for SERP dominance.",
@@ -26,7 +26,16 @@ const posts = [
     alt: "Local SEO map with ranking pins"
   },
   {
-    slug: "ux-writing-for-forms",
+    slug: "local-seo-mastery-2024",
+    title: "Local SEO Mastery 2024: Complete Guide",
+    date: "2024-03-15",
+    excerpt: "Master local SEO with proven strategies for 2024 and beyond.",
+    tags: ["SEO","Local"],
+    cover: "/media/blog/local-seo.webp",
+    alt: "Local SEO mastery guide"
+  },
+  {
+    slug: "ux-forms-conversion-optimization",
     title: "UX Writing for Forms that Convert",
     date: "2024-06-12",
     excerpt: "Microcopy patterns that reduce friction and increase completion rate.",
@@ -35,7 +44,7 @@ const posts = [
     alt: "Form UI with microcopy hints"
   },
   {
-    slug: "ga4-events-that-matter",
+    slug: "ga4-event-tracking-mastery",
     title: "GA4 Events that Actually Matter for Growth",
     date: "2024-10-01",
     excerpt: "A minimal, scalable event schema that maps cleanly to funnels.",
@@ -44,7 +53,7 @@ const posts = [
     alt: "GA4 event funnel charts"
   },
   {
-    slug: "wordpress-speed-checklist",
+    slug: "wordpress-speed-optimization-guide",
     title: "WordPress Speed Checklist for 2025",
     date: "2025-01-15",
     excerpt: "The essential ops for caching, images, and CWV-friendly themes.",
@@ -53,7 +62,7 @@ const posts = [
     alt: "WordPress speed optimization"
   },
   {
-    slug: "content-hub-blueprints",
+    slug: "content-hub-strategy-guide",
     title: "Content Hub Blueprints for Topic Authority",
     date: "2025-03-05",
     excerpt: "Structuring clusters that rank and send traffic to money pages.",
@@ -62,7 +71,7 @@ const posts = [
     alt: "Content hub network diagram"
   },
   {
-    slug: "ab-testing-smarter",
+    slug: "ab-testing-conversion-optimization",
     title: "A/B Testing that Doesn't Waste Your Traffic",
     date: "2025-05-20",
     excerpt: "Prioritization, MDE, and guardrails for realistic decision-making.",
@@ -71,13 +80,22 @@ const posts = [
     alt: "A/B split test UI"
   },
   {
-    slug: "brand-messaging-framework",
+    slug: "brand-messaging-strategy-guide",
     title: "A Practical Brand Messaging Framework",
     date: "2025-08-08",
     excerpt: "Positioning → promises → reasons-to-believe — tied to outcomes.",
     tags: ["Brand","Copy"],
     cover: "/media/blog/brand-messaging.webp",
     alt: "Brand identity flat lay"
+  },
+  {
+    slug: "seo-trends-2025",
+    title: "SEO Trends 2025: What's Coming Next",
+    date: "2025-01-01",
+    excerpt: "The latest SEO trends and strategies for 2025.",
+    tags: ["SEO","Trends"],
+    cover: "/media/blog/local-seo.webp",
+    alt: "SEO trends 2025"
   },
 ];
 

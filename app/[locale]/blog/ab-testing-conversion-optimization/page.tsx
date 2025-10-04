@@ -18,7 +18,7 @@ export default function Page(){
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">A/B Testing Mastery: Data-Driven Conversion Optimization Framework</h1>
           <p className="mt-3 text-neutral-600 max-w-2xl">Master the art and science of A/B testing with proven methodologies, statistical best practices, and advanced optimization strategies that can increase conversion rates by 50% or more through systematic experimentation.</p>
           <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <Image src="/blog/ab-testing.webp" alt="A/B Testing Dashboard" width={1280} height={720} className="h-full w-full object-cover" priority />
+            <Image src="/media/blog/ab-testing.webp" alt="A/B Testing Dashboard" width={1280} height={720} className="h-full w-full object-cover" priority />
           </div>
         </div>
       </section>

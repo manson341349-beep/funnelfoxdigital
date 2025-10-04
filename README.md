@@ -132,7 +132,7 @@ server {
   ssl_certificate_key /etc/letsencrypt/live/funnelfoxdigital.com/privkey.pem;
 
   location / {
-    proxy_pass http://127.0.0.1:3011;
+    proxy_pass http://127.0.0.1:3010;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

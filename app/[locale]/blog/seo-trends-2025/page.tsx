@@ -18,7 +18,7 @@ export default function Page(){
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">SEO Trends 2025: What Malaysian Businesses Need to Know</h1>
           <p className="mt-3 text-neutral-600 max-w-2xl">Stay ahead of the curve with the latest SEO trends and algorithm updates</p>
           <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <Image src="/blog/local-seo.webp" alt="SEO Trends 2025" width={1280} height={720} className="h-full w-full object-cover" priority />
+            <Image src="/media/blog/local-seo.webp" alt="SEO Trends 2025" width={1280} height={720} className="h-full w-full object-cover" priority />
           </div>
         </div>
       </section>

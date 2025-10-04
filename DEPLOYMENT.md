@@ -7,8 +7,8 @@
 
 ### 1. 创建部署目录
 ```bash
-mkdir -p /var/www/funnelfoxdigital
-cd /var/www/funnelfoxdigital
+mkdir -p "/var/www/FunnelFox Digital"
+cd "/var/www/FunnelFox Digital"
 ```
 
 ### 2. 确保 Docker 和 Docker Compose 可用
@@ -55,7 +55,7 @@ ssh-copy-id user@your-vps-ip
 ### 手动部署（如果需要）
 ```bash
 # 在 VPS 上手动部署
-cd /var/www/funnelfoxdigital
+cd "/var/www/FunnelFox Digital"
 git pull origin main
 docker compose up -d --build
 ```

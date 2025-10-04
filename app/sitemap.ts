@@ -25,8 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cases/project-1",
     "/cases/project-2",
     "/cases/project-3",
-    "/blog/cwv-checklist-2025",
-    "/blog/local-seo-kl"
+    "/blog/ai-powered-cwv-optimization",
+    "/blog/local-seo-kl",
+    "/blog/local-seo-mastery-2024",
+    "/blog/seo-trends-2025"
   ];
 
   return staticPaths.map((path) => ({

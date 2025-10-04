@@ -18,7 +18,7 @@ export default function Page(){
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">GA4 Event Tracking Mastery: Complete Guide to Advanced Analytics</h1>
           <p className="mt-3 text-neutral-600 max-w-2xl">Master Google Analytics 4 event tracking with comprehensive strategies for measuring user interactions, setting up custom events, and leveraging enhanced ecommerce tracking to make data-driven decisions that grow your business.</p>
           <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100">
-            <Image src="/blog/ga4-events.webp" alt="GA4 Event Tracking Dashboard" width={1280} height={720} className="h-full w-full object-cover" priority />
+            <Image src="/media/blog/ga4-events.webp" alt="GA4 Event Tracking Dashboard" width={1280} height={720} className="h-full w-full object-cover" priority />
           </div>
         </div>
       </section>
