@@ -1,16 +1,10 @@
-import React from "react";
+import ProcessPageClient from "@/components/process/ProcessPageClient";
 
 export const metadata = {
-  title: "Our Process | FunnelFox Digital"
+  title: "Our Process | FunnelFox Digital",
+  description: "Transform your business with our proven 4-step process: Discovery, Design, Launch, and Scale. Clear milestones, transparent communication, and measurable outcomes."
 };
 
 export default function Page() {
-  return (
-    <main className="container-max py-16">
-      <h1 className="text-3xl md:text-4xl font-bold">Our Process</h1>
-      <p className="mt-4 text-neutral-600">
-        Discovery → Design → Launch → Scale. Clear milestones, transparent comms, measurable outcomes.
-      </p>
-    </main>
-  );
+  return <ProcessPageClient />;
 }

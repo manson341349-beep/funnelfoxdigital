@@ -1,0 +1,43 @@
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6817;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff8c42;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="225" fill="url(#bg)"/>
+  
+  <!-- Healthcare Cross Icon -->
+  <g transform="translate(80, 60)">
+    <rect x="18" y="8" width="4" height="24" fill="#10b981" rx="2"/>
+    <rect x="8" y="18" width="24" height="4" fill="#10b981" rx="2"/>
+  </g>
+  
+  <!-- SEO Growth Chart -->
+  <g transform="translate(140, 80)">
+    <rect x="0" y="20" width="8" height="20" fill="url(#accent)" rx="2"/>
+    <rect x="12" y="15" width="8" height="25" fill="url(#accent)" rx="2"/>
+    <rect x="24" y="8" width="8" height="32" fill="url(#accent)" rx="2"/>
+    <rect x="36" y="5" width="8" height="35" fill="url(#accent)" rx="2"/>
+    <rect x="48" y="2" width="8" height="38" fill="url(#accent)" rx="2"/>
+  </g>
+  
+  <!-- Search Icon -->
+  <g transform="translate(280, 70)">
+    <circle cx="15" cy="15" r="12" stroke="#6b7280" stroke-width="2" fill="none"/>
+    <path d="m25 25 6 6" stroke="#6b7280" stroke-width="2"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#1f2937">KopiKlinik</text>
+  <text x="200" y="160" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#6b7280">Local SEO Success</text>
+  
+  <!-- Metrics -->
+  <text x="200" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="#10b981">+220% Organic Traffic</text>
+</svg>
