@@ -2,17 +2,21 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = useTranslations('nav');
+  const tCta = useTranslations('cta');
+  const tCommon = useTranslations('common');
+  const locale = useLocale();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'About', href: '/about' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
+    { name: t('services'), href: `/${locale}/services` },
+    { name: t('cases'), href: `/${locale}/cases` },
+    { name: t('process'), href: `/${locale}/process` },
+    { name: t('blog'), href: `/${locale}/blog` },
+    { name: t('contact'), href: `/${locale}/contact` },
   ];
 
   return (
@@ -21,7 +25,7 @@ const Header = () => {
         <div className="flex w-full items-center justify-between py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href={`/${locale}`} className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">F</span>
               </div>
@@ -41,10 +45,10 @@ const Header = () => {
               </Link>
             ))}
             <Link
-              href="/blueprint"
+              href={`/${locale}/blueprint`}
               className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors duration-200 font-medium"
             >
-              Get Blueprint
+              {tCta('blueprint')}
             </Link>
           </div>
 
@@ -54,7 +58,7 @@ const Header = () => {
               type="button"
               className="text-gray-700 hover:text-primary"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label={tCommon('toggleMenu')}
             >
               <svg
                 className="h-6 w-6"
@@ -88,11 +92,11 @@ const Header = () => {
                 </Link>
               ))}
               <Link
-                href="/blueprint"
+                href={`/${locale}/blueprint`}
                 className="block bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors duration-200 font-medium text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Get Blueprint
+                {tCta('blueprint')}
               </Link>
             </div>
           </div>

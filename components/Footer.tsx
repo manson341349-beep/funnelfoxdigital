@@ -1,25 +1,30 @@
+'use client';
+
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const t = useTranslations('nav');
+  const tCta = useTranslations('cta');
+  const locale = useLocale();
 
   const footerLinks = {
     services: [
-      { name: 'Digital Marketing', href: '/services#digital-marketing' },
-      { name: 'Web Development', href: '/services#web-development' },
-      { name: 'SEO Optimization', href: '/services#seo' },
-      { name: 'Content Strategy', href: '/services#content' },
+      { name: 'Web Design', href: `/${locale}/services/web-design` },
+      { name: 'SEO', href: `/${locale}/services/seo` },
+      { name: 'WordPress', href: `/${locale}/services/wordpress` },
+      { name: 'App Design', href: `/${locale}/services/app-design` },
     ],
     company: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Portfolio', href: '/portfolio' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Contact', href: '/contact' },
+      { name: t('about'), href: `/${locale}/about` },
+      { name: t('portfolio'), href: `/${locale}/portfolio` },
+      { name: t('blog'), href: `/${locale}/blog` },
+      { name: t('contact'), href: `/${locale}/contact` },
     ],
     legal: [
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Cookie Policy', href: '/cookies' },
+      { name: 'Privacy Policy', href: `/${locale}/privacy` },
+      { name: 'Terms of Service', href: `/${locale}/terms` },
     ],
   };
 
@@ -39,10 +44,10 @@ const Footer = () => {
               Transforming businesses through strategic digital marketing and innovative web solutions.
             </p>
             <Link
-              href="/blueprint"
+              href={`/${locale}/blueprint`}
               className="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors duration-200 font-medium"
             >
-              Get Your Blueprint
+              {tCta('blueprint')}
             </Link>
           </div>
 
