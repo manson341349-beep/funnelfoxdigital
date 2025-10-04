@@ -16,7 +16,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: ./
-          remote_path: /var/www/funnelfoxdigital
+          remote_path: "/var/www/FunnelFox Digital"
           remote_host: ${{ secrets.SSH_HOST }}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: ${{ secrets.SSH_KEY }}
@@ -28,5 +28,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/funnelfoxdigital
+            cd "/var/www/FunnelFox Digital"
             docker-compose up -d --build
