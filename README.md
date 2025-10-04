@@ -3,6 +3,8 @@
 Conversion-first websites, SEO, and funnel services — built with **Next.js 14 App Router** + **TypeScript** + **Tailwind CSS**.  
 Supports **multi-language (en / zh / ms)**, **Docker** deployment, **Nginx** reverse proxy, **Let's Encrypt SSL**, **GA4**, and **SMTP (Hostinger)**.
 
+<!-- GitHub Actions Auto-Deployment Test -->
+
 ---
 
 ## 🛠 Tech Stack
