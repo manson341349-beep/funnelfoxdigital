@@ -1,34 +1,43 @@
-# 依赖安装阶段
-FROM node:20-alpine AS deps
-WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm install
-
-# 构建阶段
+# Stage 1 — Build
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+
+# Copy dependency files
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy all project files
 COPY . .
+
+# Build production assets
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 RUN npm run build
 
-# 生产运行阶段
+# Stage 2 — Run (Production)
 FROM node:20-alpine AS runner
 WORKDIR /app
+
 ENV NODE_ENV=production
+ENV PORT=3011
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# 创建非root用户
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Copy from builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package-lock.json ./package-lock.json
 
-# 复制构建产物
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+# Install only production dependencies
+RUN npm ci --omit=dev
 
-USER nextjs
+# Expose the port used by Next.js
+EXPOSE 3011
 
-EXPOSE 3010
-ENV PORT=3010
-ENV HOSTNAME="0.0.0.0"
+# Healthcheck (optional)
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD wget -qO- http://localhost:3011/en || exit 1
 
-CMD ["node", "server.js"]
+# Start the Next.js server
+CMD ["npm", "run", "start"]
