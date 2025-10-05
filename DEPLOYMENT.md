@@ -134,4 +134,4 @@ journalctl -u docker
 ### 备份策略
 - 定期备份应用数据
 - 备份 Docker 镜像
-- 备份配置文件
+- 备份配置文件# Deployment test Sun Oct  5 14:28:13 +08 2025
