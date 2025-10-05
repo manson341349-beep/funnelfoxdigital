@@ -1,32 +1,63 @@
-name: Deploy to VPS
+name: Deploy via rsync
 
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Send files via rsync over SSH
+      - name: Validate environment variables
+        run: |
+          echo "Validating required secrets..."
+          if [ -z "${{ secrets.SSH_HOST }}" ]; then
+            echo "❌ SSH_HOST secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SSH_USER }}" ]; then
+            echo "❌ SSH_USER secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "❌ SSH_PRIVATE_KEY secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SSH_PORT }}" ]; then
+            echo "❌ SSH_PORT secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SERVER_PROJECT_DIR }}" ]; then
+            echo "❌ SERVER_PROJECT_DIR secret is not set"
+            exit 1
+          fi
+          echo "✅ All required secrets are configured"
+          echo "Host: ${{ secrets.SSH_HOST }}"
+          echo "User: ${{ secrets.SSH_USER }}"
+          echo "Port: ${{ secrets.SSH_PORT }}"
+          echo "Target: ${{ secrets.SERVER_PROJECT_DIR }}"
+
+      - name: Deploy with rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: ./
-          remote_path: /var/www/FunnelFox\ Digital
-          remote_host: ${{ secrets.REMOTE_HOST }}
-          remote_user: ${{ secrets.REMOTE_USER }}
-          remote_key: ${{ secrets.REMOTE_KEY }}
+          remote_path: "${{ secrets.SERVER_PROJECT_DIR }}"
+          remote_host: "${{ secrets.SSH_HOST }}"
+          remote_user: "${{ secrets.SSH_USER }}"
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          remote_port: "${{ secrets.SSH_PORT }}"
 
       - name: Build & restart on VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.REMOTE_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/FunnelFox\ Digital
+            cd "${{ secrets.SERVER_PROJECT_DIR }}"
             docker-compose up -d --build
