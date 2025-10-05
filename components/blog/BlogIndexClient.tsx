@@ -25,15 +25,7 @@ const posts = [
     cover: "/media/blog/local-seo.webp",
     alt: "Local SEO map with ranking pins"
   },
-  {
-    slug: "local-seo-mastery-2024",
-    title: "Local SEO Mastery 2024: Complete Guide",
-    date: "2024-03-15",
-    excerpt: "Master local SEO with proven strategies for 2024 and beyond.",
-    tags: ["SEO","Local"],
-    cover: "/media/blog/local-seo.webp",
-    alt: "Local SEO mastery guide"
-  },
+
   {
     slug: "ux-forms-conversion-optimization",
     title: "UX Writing for Forms that Convert",
@@ -88,15 +80,7 @@ const posts = [
     cover: "/media/blog/brand-messaging.webp",
     alt: "Brand identity flat lay"
   },
-  {
-    slug: "seo-trends-2025",
-    title: "SEO Trends 2025: What's Coming Next",
-    date: "2025-01-01",
-    excerpt: "The latest SEO trends and strategies for 2025.",
-    tags: ["SEO","Trends"],
-    cover: "/media/blog/local-seo.webp",
-    alt: "SEO trends 2025"
-  },
+
 ];
 
 const fadeUp = {
