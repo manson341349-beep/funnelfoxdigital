@@ -51,13 +51,118 @@ jobs:
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
           remote_port: "${{ secrets.SSH_PORT }}"
 
-      - name: Build & restart on VPS
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Test SSH Connection
+        run: |
+          echo "Testing SSH connection to ${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }}..."
+          
+          # Create SSH key file
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          
+          # Add host to known_hosts to avoid host key verification
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+          
+          # Test SSH connection with timeout
+          echo "Attempting SSH connection test..."
+          ssh -i ~/.ssh/deploy_key \
+              -p ${{ secrets.SSH_PORT }} \
+              -o ConnectTimeout=30 \
+              -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+              "echo 'SSH connection successful'; pwd; whoami" || {
+            echo "❌ SSH connection failed!"
+            echo "Debugging information:"
+            echo "Host: ${{ secrets.SSH_HOST }}"
+            echo "Port: ${{ secrets.SSH_PORT }}"
+            echo "User: ${{ secrets.SSH_USER }}"
+            echo "Please check:"
+            echo "1. VPS is running and accessible"
+            echo "2. SSH port ${{ secrets.SSH_PORT }} is open in firewall"
+            echo "3. SSH service is running on the VPS"
+            echo "4. SSH key is correct and has proper permissions"
+            exit 1
+          }
+
+      - name: Deploy with rsync
+        uses: burnett01/rsync-deployments@7.0.1
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
+          switches: -avzr --delete --timeout=60
+          path: ./
+          remote_path: "${{ secrets.SERVER_PROJECT_DIR }}"
+          remote_host: "${{ secrets.SSH_HOST }}"
+          remote_user: "${{ secrets.SSH_USER }}"
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          remote_port: "${{ secrets.SSH_PORT }}"
+          rsh: "ssh -o ConnectTimeout=30 -o StrictHostKeyChecking=no"
+
+      - name: Build & restart on VPS (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 2
+          retry_wait_seconds: 60
+          command: |
+            ssh -i ~/.ssh/deploy_key \
+                -p ${{ secrets.SSH_PORT }} \
+                -o ConnectTimeout=30 \
+                -o StrictHostKeyChecking=no \
+                -o ServerAliveInterval=60 \
+                -o ServerAliveCountMax=3 \
+                ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
             cd "${{ secrets.SERVER_PROJECT_DIR }}"
-            docker-compose up -d --build
+            
+            # Create .env file from GitHub secrets (without logging secret values)
+            echo "Creating .env file..."
+            cat > .env << 'EOF'
+            NODE_ENV=production
+            PORT=3000
+            NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}
+            SMTP_HOST=${{ secrets.SMTP_HOST }}
+            SMTP_PORT=${{ secrets.SMTP_PORT }}
+            SMTP_USER=${{ secrets.SMTP_USER }}
+            SMTP_PASS=${{ secrets.SMTP_PASS }}
+            EOF
+            
+            echo "✅ Environment file created successfully"
+            
+            # Check if docker-compose.yml exists in current directory or subdirectory
+            COMPOSE_FILE=""
+            if [ -f "docker-compose.yml" ]; then
+              COMPOSE_FILE="docker-compose.yml"
+              echo "Found docker-compose.yml in current directory"
+            elif [ -f "docker/docker-compose.yml" ]; then
+              COMPOSE_FILE="docker/docker-compose.yml"
+              echo "Found docker-compose.yml in docker/ subdirectory"
+            elif [ -f "deployment/docker-compose.yml" ]; then
+              COMPOSE_FILE="deployment/docker-compose.yml"
+              echo "Found docker-compose.yml in deployment/ subdirectory"
+            else
+              echo "❌ docker-compose.yml not found!"
+              exit 1
+            fi
+            
+            # Stop existing containers
+            echo "Stopping existing containers..."
+            if docker compose version &> /dev/null; then
+              docker compose -f "$COMPOSE_FILE" down || true
+            elif command -v docker-compose &> /dev/null; then
+              docker-compose -f "$COMPOSE_FILE" down || true
+            fi
+            
+            # Build and start containers with Docker Compose using --env-file
+            echo "Building and starting containers with environment file..."
+            if docker compose version &> /dev/null; then
+              echo "Using Docker Compose v2..."
+              docker compose -f "$COMPOSE_FILE" --env-file ./.env up -d --build
+            elif command -v docker-compose &> /dev/null; then
+              echo "Using Docker Compose v1..."
+              docker-compose -f "$COMPOSE_FILE" --env-file ./.env up -d --build
+            else
+              echo "❌ Docker Compose not found!"
+              exit 1
+            fi
+            
+            echo "✅ Deployment completed successfully"
+            ENDSSH
